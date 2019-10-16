@@ -15,13 +15,13 @@
  */
 'use strict';
 
-// Signs-in Friendly Chat.
+// Signs-in DamoGo Business.
 function signIn() {
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider);
 }
 
-// Signs-out of Friendly Chat.
+// Signs-out of DamoGo Business.
 function signOut() {
   firebase.auth().signOut();
 }
