@@ -216,6 +216,14 @@ main, #messages-card {
 }
 
 .price {
-  display: inline;
+  font-size: 24px;
+  font-weight: 300;
+  padding: 5px;
+}
+
+.originalPrice {
+  color: red;
+  font-size: large;
+  text-decoration: line-through;
 }
 

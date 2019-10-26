@@ -38,17 +38,30 @@ function isUserSignedIn() {
 
 // Saves the messaging device token to the datastore.
 function saveMessagingDeviceToken() {
-  firebase.messaging().getToken().then((currentToken) => {
-    if (currentToken) {
-      // Saving the Device Token to the datastore.
-      firebase.firestore().collection('fcmTokens').doc(currentToken)
-          .set({uid: firebase.auth().currentUser.uid});
-    } else {
-      // Need to request permissions to show notifications.
-      requestNotificationsPermissions();
-    }
+  if(firebase.messaging.isSupported()){
+    firebase.messaging().getToken().then((currentToken) => {
+      if (currentToken) {
+        // Saving the Device Token to the datastore.
+        firebase.firestore().collection('fcmTokens').doc(currentToken)
+            .set({uid: firebase.auth().currentUser.uid});
+      } else {
+        // Need to request permissions to show notifications.
+        requestNotificationsPermissions();
+      }
+    }).catch((error) => {
+      console.error('Unable to get messaging token.', error);
+    });
+  }
+}
+
+// Requests permissions to show notifications.
+function requestNotificationsPermissions() {
+  console.log('Requesting notifications permission...');
+  firebase.messaging().requestPermission().then(() => {
+    // Notification permission granted.
+    saveMessagingDeviceToken();
   }).catch((error) => {
-    console.error('Unable to get messaging token.', error);
+    console.error('Unable to get permission to notify.', error);
   });
 }
 
@@ -60,7 +73,7 @@ const ITEM_TEMPLATE =
     '</div>' +
     '<div class="card-content">' +
       '<strong class="card-title title darken black-text"></strong>' + 
-      '<span class="card-title price"></span>' +
+      '<span class="price"></span>' +
       '<span class = "originalPrice"></span>' +
       '<p class="description"></p>' +
     '</div>' +

@@ -63,12 +63,15 @@ function saveMessagingDeviceToken() {
 // Requests permissions to show notifications.
 function requestNotificationsPermissions() {
   console.log('Requesting notifications permission...');
-  firebase.messaging().requestPermission().then(() => {
-    // Notification permission granted.
-    saveMessagingDeviceToken();
-  }).catch((error) => {
-    console.error('Unable to get permission to notify.', error);
-  });
+  if(firebase.messaging.isSupported()){
+    firebase.messaging().requestPermission().then(() => {
+      // Notification permission granted.
+      saveMessagingDeviceToken();
+    }).catch((error) => {
+      console.error('Unable to get permission to notify.', error);
+    });
+  }
+  
 }
 
 function getUserName() {
