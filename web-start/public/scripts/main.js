@@ -18,6 +18,7 @@
 // Signs-out of DamoGo Business.
 function signOut() {
   firebase.auth().signOut();
+  window.location.href="index.html";
 }
 
 // Initiate firebase auth.
@@ -74,7 +75,7 @@ const ITEM_ORIGINAL_PRICE = 'originalPrice';
 
 // Delete a Item from the UI.
 function deleteItem(id) {
-  var div = document.getElementById(id);
+  let div = document.getElementById(id);
   // If an element for that item exists we delete it.
   if (div) {
     div.parentNode.removeChild(div);
@@ -129,7 +130,7 @@ const getContent = (item, contentName) => {
 
 // Displays an Item in the UI.
 function displayItem(id, timestamp, item) {
-  var div = document.getElementById(id) || createAndInsertItem(id, timestamp);
+  let div = document.getElementById(id) || createAndInsertItem(id, timestamp);
 
   div.querySelector('.title').textContent = getContent(item, ITEM_NAME);
   div.querySelector('img').setAttribute('src', getContent(item, ITEM_IMAGE));
@@ -145,7 +146,8 @@ function displayItem(id, timestamp, item) {
 // Loads chat items history and listens for upcoming ones.
 function loadItems() {
   // Create the query to load the last 12 items and listen for new ones.
-  var query = firebase.firestore().collection('items').limit(12);
+  let query = firebase.firestore().collection('items').orderBy('timestamp', 'desc').limit(12);
+  
   
   // Start listening to the query.
   query.onSnapshot((snapshot) => {
@@ -153,10 +155,19 @@ function loadItems() {
       if (change.type === 'removed') {
         deleteItem(change.doc.id);
       } else {
-        var item = change.doc.data();
+        let item = change.doc.data();
         displayItem(change.doc.id, item.timestamp, item);
       }
     });
+  }, (error) => {
+    if(error.code == 'permission-denied'){
+        // Display a message to the user using a Toast.
+        let data = {
+          message: 'You have to sign-in first',
+          timeout: 5000
+        };
+        signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
+    }
   });
 }
 
@@ -166,17 +177,19 @@ function loadItems() {
 function authStateObserver(user) {
   if (user) { // User is signed in!
     // Get the signed-in user's profile pic and name.
-    var userName = user.displayName;
+    let userName = user.displayName;
     
     // Set the user's profile pic and name.
-    userNameElement.textContent = userName;
+    userNameElement.innerHTML = userName;
 
     // Show user's profile and sign-out button.
     userNameElement.removeAttribute('hidden');
     signOutButtonElement.removeAttribute('hidden');
-
+    
     // Hide sign-in button.
     signInButtonElement.setAttribute('hidden', 'true');
+    loginMessageElement.setAttribute('hidden', 'true');
+
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
@@ -187,6 +200,7 @@ function authStateObserver(user) {
 
     // Show sign-in button.
     signInButtonElement.removeAttribute('hidden');
+    loginMessageElement.removeAttribute('hidden')
   }
 }
 
@@ -198,7 +212,7 @@ function checkSignedInWithMessage() {
   }
 
   // Display a message to the user using a Toast.
-  var data = {
+  let data = {
     message: 'You must sign-in first',
     timeout: 2000
   };
@@ -215,7 +229,7 @@ function addSizeToGoogleProfilePic(url) {
 }
 
 // A loading image URL.
-var LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
+let LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif?a';
 
 
 // Checks that the Firebase SDK has been correctly setup and configured.
@@ -232,23 +246,27 @@ checkSetup();
 
 // Shortcuts to DOM Elements.
 let itemsListElement = document.getElementById('item-card-container');
-var userNameElement = document.getElementById('user-name');
-var signInButtonElement = document.getElementById('sign-in');
-var signOutButtonElement = document.getElementById('sign-out');
-var signInSnackbarElement = document.getElementById('must-signin-snackbar');
+let userNameElement = document.getElementById('user-name');
+let loginMessageElement = document.getElementById('login-first');
+let signInButtonElement = document.getElementById('sign-in');
+let signOutButtonElement = document.getElementById('sign-out');
+let signInSnackbarElement = document.getElementById('must-signin-snackbar');
+let documentElem = document.getElementsByTagName('body')[0];
 
 signOutButtonElement.addEventListener('click', signOut);
+documentElem.addEventListener('click', checkSignedInWithMessage)
 
 
 // initialize Firebase
 initFirebaseAuth();
 
 // Remove the warning about timstamps change. 
-var firestore = firebase.firestore();
-var settings = {};
+let firestore = firebase.firestore();
+let settings = {};
 firestore.settings(settings);
 
 // TODO: Enable Firebase Performance Monitoring.
 
 // Load currently existing items and listen for new ones
-loadItems();
+// only if the user is logged in
+loadItems()
