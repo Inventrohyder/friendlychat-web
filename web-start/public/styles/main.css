@@ -247,11 +247,6 @@ button#sign-in {
   background: linear-gradient(45deg, #fff, #0288D1)!important;
 }
 
-.brand-logo.center {
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .item-info {
   border-radius: 0.5em !important;
   overflow: hidden;
