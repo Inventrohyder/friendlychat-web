@@ -15,31 +15,22 @@
  */
 'use strict';
 
-function createUser(email, password, name) {
-  firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-    console.log('Name:', name);
-    firebase.auth().currentUser.updateProfile({
-      displayName: name
-    }).then(function() {
-      // Update successful.
+// Signs-in DamoGo Business.
+function signIn(email, password) {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
       window.location.href = 'index.html';
     }).catch(function(error) {
-      // An error happened.
-      alert(error.message);
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+        } else {
+            alert(errorMessage);
+        }
+        console.log(error);
+        // ...
     });
-  }).catch((error) => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // [START_EXCLUDE]
-    if (errorCode == 'auth/weak-password') {
-      alert('The password is too weak.');
-    } else {
-      alert(errorMessage);
-    }
-    console.log(error);
-    // [END_EXCLUDE]
-  });
 }
 
 // Initiate firebase auth.
@@ -72,19 +63,20 @@ function saveMessagingDeviceToken() {
 // Requests permissions to show notifications.
 function requestNotificationsPermissions() {
   console.log('Requesting notifications permission...');
-  firebase.messaging().requestPermission().then(() => {
-    // Notification permission granted.
-    saveMessagingDeviceToken();
-  }).catch((error) => {
-    console.error('Unable to get permission to notify.', error);
-  });
+  if(firebase.messaging.isSupported()){
+    firebase.messaging().requestPermission().then(() => {
+      // Notification permission granted.
+      saveMessagingDeviceToken();
+    }).catch((error) => {
+      console.error('Unable to get permission to notify.', error);
+    });
+  }
+  
 }
 
-// Returns the signed-in user's display name.
 function getUserName() {
   return firebase.auth().currentUser.displayName;
 }
-
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
@@ -92,15 +84,18 @@ function authStateObserver(user) {
     // Get the signed-in user's name.
     var userName = getUserName();
 
-    // Hide sign-in button.
-    signInButtonElement.setAttribute('hidden', 'true');
+    userNameElement.textContent = userName;
+
+    // Show user's profile and sign-out button.
+    userNameElement.removeAttribute('hidden');
+
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
+    window.location.href = 'index.html';
   } else { // User is signed out!
-
-    // Show sign-in button.
-    signInButtonElement.removeAttribute('hidden');
+    // Hide user's profile and sign-out button.
+    userNameElement.setAttribute('hidden', 'true');
   }
 }
 
@@ -109,16 +104,7 @@ function onFormSubmit(e) {
   e.preventDefault();
   let email = emailElement.value;
   let password = passwordElement.value;
-  let displayName = userNameElement.value;
-  createUser(email, password, displayName);
-}
-
-function validatePassword(){
-  if(passwordElement.value != confirmPasswordElement.value) {
-    confirmPasswordElement.setCustomValidity("Passwords Don't Match");
-  } else {
-    confirmPasswordElement.setCustomValidity('');
-  }
+  signIn(email, password);
 }
 
 
@@ -133,19 +119,19 @@ function checkSetup() {
 checkSetup();
 
 // Shortcuts to DOM Elements.
+var loginFormElement = document.getElementById('login');
 var emailElement = document.getElementById('email');
-let userNameElement = document.getElementById('user-name');
 let passwordElement = document.getElementById('password');
-let confirmPasswordElement = document.getElementById('retype-password');
-let createFormElement = document.getElementById('create');
-let signInButtonElement = document.getElementById('sign-in');
+let userNameElement = document.getElementById('user-name');
 
-// Add event listeners
-createFormElement.addEventListener('submit', onFormSubmit);
-passwordElement.onchange = validatePassword;
-confirmPasswordElement.onkeyup = validatePassword;
+// Saves message on form submit.
+loginFormElement.addEventListener('submit', onFormSubmit)
+
 
 // initialize Firebase
 initFirebaseAuth();
+
+// Remove the warning about timstamps change. 
+var firestore = firebase.firestore();
 
 
