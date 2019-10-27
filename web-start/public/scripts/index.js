@@ -70,7 +70,7 @@ const ITEM_TEMPLATE = '<div class="card item-info">\
 <div class="card-image waves-effect waves-block waves-light">\
   <img class="activator image" src="https://storage.googleapis.com/spec-host/mio-staging%2Fmio-material%2F1570560286703%2Fassets%2F1AjERaybjP3SVO4etBFrHVHNF0yU-9igT%2Fmda19-2x1-large.png">\
 </div>\
-<div class="card-content">\
+<div class="card-content card-align-bottom">\
   <span class="card-title title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>\
   <span class = "price"></span>\
   <span class = "originalPrice"></span>\

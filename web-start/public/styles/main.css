@@ -195,62 +195,9 @@
     margin-right: 5px;
   }
   
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
-    color: #0288D1;
-  }
-  
-  .input-field:focus {
-    color: #0288D1;
-  }
-  
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
-    border-bottom: 1px solid #000;
-    box-shadow: 0 1px 0 0 #000;
-  }
-  
-  .price {
-    font-size: x-large; 
-    padding-right: 5px;
-  }
-  
-  .originalPrice {
-    color: red;
-    font-size: large;
-    text-decoration: line-through;
-  }
-  
-  button#sign-in {
-    overflow: visible;
-  }
-  
-  .btn-floating.add-fab {
-    position: absolute;
-    right: 15px;
-    bottom: 15px;
-    background-color: transparent;
-    border: solid #0288D1 1px;
-  }
-  
-  .btn-floating.add-fab:hover{
-    background-color:rgba(0, 200, 255, 0.37);
-    border: solid #0288D1 1px;
-    box-shadow: 0 0 10px rgba(81, 203, 238, 1);
-  }
-  
-  .material-icons.add-fab {
-    color: #0288D1;
-  }
-  
-  .gradient-45deg-white-light-blue {
+.gradient-45deg-white-light-blue {
     background: linear-gradient(45deg, #fff, #0288D1)!important;
-  }
-  
-  .item-info {
-    border-radius: 0.5em !important;
-    overflow: hidden;
-  }
+}
 
 .form-card {
     background-color: rgba(255, 255, 255, .9);
@@ -295,6 +242,24 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
+}
+
+.row.equal-height-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row.equal-height-grid .col {
+    display: flex;
+}
+
+.row.equal-height-grid .col .card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-align-bottom {
+    margin-top: auto;
 }
   
   
