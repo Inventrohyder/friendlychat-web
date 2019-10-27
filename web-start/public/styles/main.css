@@ -251,6 +251,51 @@
     border-radius: 0.5em !important;
     overflow: hidden;
   }
+
+.form-card {
+    background-color: rgba(255, 255, 255, .9);
+    width: 50% !important;
+    position:fixed;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+    border-radius: 1em;
+}
+
+@media screen and (max-width: 993px) {
+    .form-card {
+        width: 70% !important;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    .form-card {
+        width: 90% !important;
+        transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+}
+
+.form-bg {
+    background-image: url(https://pixinvent.com/materialize-material-design-admin-template/app-assets/images/gallery/flat-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.gradient-45deg-indigo-light-blue {
+    background: linear-gradient(45deg, rgb(140, 0, 255), #0288D1)!important;
+}
+
+.border-round {
+    border-radius: 3em !important;
+}
+
+.form-page {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
   
   
   
