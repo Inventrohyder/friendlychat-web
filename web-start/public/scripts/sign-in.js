@@ -84,18 +84,12 @@ function authStateObserver(user) {
     // Get the signed-in user's name.
     var userName = getUserName();
 
-    userNameElement.textContent = userName;
-
-    // Show user's profile and sign-out button.
-    userNameElement.removeAttribute('hidden');
-
 
     // We save the Firebase Messaging Device token and enable notifications.
     saveMessagingDeviceToken();
     window.location.href = 'index.html';
   } else { // User is signed out!
-    // Hide user's profile and sign-out button.
-    userNameElement.setAttribute('hidden', 'true');
+    
   }
 }
 

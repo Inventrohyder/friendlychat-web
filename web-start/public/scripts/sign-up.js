@@ -137,7 +137,7 @@ let emailElement = document.getElementById('email');
 let userNameElement = document.getElementById('user-name');
 let passwordElement = document.getElementById('password');
 let confirmPasswordElement = document.getElementById('retype-password');
-let createFormElement = document.getElementById('create');
+let createFormElement = document.getElementById('signup-page');
 let signInButtonElement = document.getElementById('sign-in');
 
 // Add event listeners

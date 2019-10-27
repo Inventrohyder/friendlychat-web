@@ -55,62 +55,65 @@
 
 
 </head>
-<body>
-<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
-
-  <!-- Header section containing logo -->
-  <header class="mdl-layout__header gradient-45deg-white-light-blue">
-    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
-      <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-        <a href="index.html"><img class="brand-logo center" src="images/DAMOGO-Logo.png"></a>
-      </div>
-      <div id="user-container">
-        <button id='sign-in' onclick="window.location.href='index.html'" class="mdl-color-text--white mdl-button mdl-js-ripple-effect mdl-js-button">
-            <i class="material-icons">account_circle</i>Sign-in
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="mdl-layout__content mdl-color--grey-100">
-
-    <div class="container card">
-        <form id='create' class="col s12">
+<body class="signup-bg">
+  <div class="container">
+    <div id="signup-page" class="row">
+      <div class="col s12 m6 l4 z-depth-4 signup-card bg-opacity-8">
+        <form id='login' class="col s12">
             <div class="row">
+              <div class="input-field col s12">
+                <h5 class="ml-4">Create an account</h5>
+                <p class="ml-4">Join to our community now !</p>
+              </div>
+            </div>
+            <div class="row margin">
                 <div class="input-field col s12">
-                    <input id="user-name" type="text" class="validate" required minlength="6" maxlength="15">
-                    <label for="user-name">User name</label>
+                  <i class="material-icons prefix pt-2">person_outline</i>
+                  <input id="user-name" type="text" class="validate" required minlength="6" maxlength="15">
+                  <label for="user-name">User name</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="email" type="email" class="validate" required>
-                    <label for="email">Email Address</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="password" type="password" class="validate" required minlength="6">
-                    <label for="password">Password</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="retype-password" type="password" class="validate" required minlength="6">
-                    <label for="retype-password">Retype Password</label>
-                </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">mail_outline</i>
+                <input id="email" type="email" class="validate" required>
+                <label for="email" class="center-align">Email Address</label>
+              </div>
             </div>
 
-            <button class="btn waves-effect blue waves-light" type="submit" name="action">
-                Create Account
-            </button>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">lock_outline</i>
+                <input id="password" type="password" class="validate" required>
+                <label for="password">Password</label>
+              </div>
+            </div>
+
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="material-icons prefix pt-2">lock_outline</i>
+                <input id="retype-password" type="password" class="validate" required minlength="6">
+                <label for="retype-password">Retype Password</label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s12">
+                <button class="btn waves-effect border-round gradient-45deg-indigo-light-blue waves-light col s12" type="submit" name="action">
+                  Create Account
+                </button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-field col s6 m6 l6">
+                <p class="margin medium-small"><a href="sign-in.html">Already a member? Login!</a></p>
+              </div>
+            </div>
         </form>
-    </div>  <!-- CLOSE CONTAINER -->
-                
-
+      </div>
     </div>
-  </main>
-</div>
+  </div>          
 
 <!-- Import and configure the Firebase SDK -->
 <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->

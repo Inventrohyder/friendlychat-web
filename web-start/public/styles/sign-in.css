@@ -1,5 +1,31 @@
-.container.card {
-    padding: 3%;
-    margin: auto;
-    top: 10%;
+.login-card {
+    background-color: rgba(255, 255, 255, .9);
+    width: 50% !important;
+    position:fixed;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+    border-radius: 1em;
+}
+
+.login-bg {
+    background-image: url(https://pixinvent.com/materialize-material-design-admin-template/app-assets/images/gallery/flat-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.gradient-45deg-indigo-light-blue {
+    background: linear-gradient(45deg, rgb(140, 0, 255), #0288D1)!important;
+}
+
+.border-round {
+    border-radius: 3em !important;
+}
+
+#login-page {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
 }
