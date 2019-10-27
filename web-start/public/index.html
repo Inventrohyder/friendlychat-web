@@ -57,18 +57,15 @@
 <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
 
   <!-- Header section containing logo -->
-  <header class="mdl-layout__header mdl-color-text--light-blue mdl-color--white">
+  <header class="mdl-layout__header gradient-45deg-white-light-blue">
     <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
       <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
-        <a href="#"><img class="brand-logo center" src="images/DAMOGO-Logo.png"></a>
+        <centre><a href="#"><img class="brand-logo" src="images/DAMOGO-Logo.png"></a></centre>
       </div>
       <div id="user-container">
         <div hidden id="user-name"></div>
-        <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--light-blue">
+        <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect">
           Sign-out
-        </button>
-        <button onclick="window.location.href='landing.html'" hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--light-blue">
-          <i class="material-icons" style="color:#0288D1">account_circle</i>Sign-in
         </button>
       </div>
     </div>
@@ -77,13 +74,14 @@
   <main class="mdl-layout__content mdl-color--grey-100">
       <div class="container">
 
-        <h1 hidden id="login-first" class="truncate">
-          You have to sign in to see our content.
-        </h1>
-
         <div id="item-card-container"class="row">
 
         </div>
+
+      
+        <button onclick="window.location.href='landing.html'" hidden id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--light-blue pulse">
+            <i class="material-icons" style="color:#0288D1">account_circle</i>Sign-in to you DamoGo Buyer Store account
+        </button>
 
       <div id="must-signin-snackbar" class="mdl-js-snackbar mdl-snackbar">
         <div class="mdl-snackbar__text"></div>

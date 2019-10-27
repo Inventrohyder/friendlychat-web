@@ -38,7 +38,6 @@ main, #messages-card {
 }
 .material-icons {
   font-size: 36px;
-  top: 8px;
   position: relative;
 }
 .mdl-layout__header-row {
@@ -121,9 +120,6 @@ main, #messages-card {
   margin: 15px 0 0 10px;
 }
 .mdl-card {
-  min-height: 0;
-}
-.mdl-card {
   background: linear-gradient(white, #f9f9f9);
   justify-content: space-between;
 }
@@ -177,7 +173,6 @@ main, #messages-card {
   }
   #user-container {
     top: 72px;
-    background-color: #fff;
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
@@ -216,9 +211,8 @@ main, #messages-card {
 }
 
 .price {
-  font-size: 24px;
-  font-weight: 300;
-  padding: 5px;
+  font-size: x-large; 
+  padding-right: 5px;
 }
 
 .originalPrice {
@@ -226,4 +220,38 @@ main, #messages-card {
   font-size: large;
   text-decoration: line-through;
 }
+
+button#sign-in {
+  margin: 30%;
+  overflow: visible;
+}
+
+.btn-floating.add-fab {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background-color: transparent;
+  border: solid #0288D1 1px;
+}
+
+.btn-floating.add-fab:hover{
+  background-color:rgba(0, 200, 255, 0.37);
+  border: solid #0288D1 1px;
+  box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+}
+
+.material-icons.add-fab {
+  color: #0288D1;
+}
+
+.gradient-45deg-white-light-blue {
+  background: linear-gradient(45deg, #fff, #0288D1)!important;
+}
+
+.item-info {
+  border-radius: 0.5em !important;
+  overflow: hidden;
+}
+
+
 

@@ -66,18 +66,21 @@ function requestNotificationsPermissions() {
 }
 
 // Template for items.
-const ITEM_TEMPLATE =
-  '<div class="card">' +
-    '<div class="card-image">' +
-      '<img class="image">' +
-    '</div>' +
-    '<div class="card-content">' +
-      '<strong class="card-title title darken black-text"></strong>' + 
-      '<span class="price"></span>' +
-      '<span class = "originalPrice"></span>' +
-      '<p class="description"></p>' +
-    '</div>' +
-  '</div>';
+const ITEM_TEMPLATE = '<div class="card item-info">\
+<div class="card-image waves-effect waves-block waves-light">\
+  <img class="activator image" src="https://storage.googleapis.com/spec-host/mio-staging%2Fmio-material%2F1570560286703%2Fassets%2F1AjERaybjP3SVO4etBFrHVHNF0yU-9igT%2Fmda19-2x1-large.png">\
+</div>\
+<div class="card-content">\
+  <span class="card-title title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>\
+  <span class = "price"></span>\
+  <span class = "originalPrice"></span>\
+  <a class="btn-floating add-fab waves-effect waves-light"><i class="material-icons add-fab">add</i></a>\
+</div>\
+<div class="card-reveal">\
+  <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>\
+  <p class = "description" >Here is some more information about this product that is only revealed once clicked on.</p>\
+</div>\
+</div>';
 
   // The Keys to differrent values in the database
 const ITEM_NAME = 'name';
@@ -201,7 +204,6 @@ function authStateObserver(user) {
     
     // Hide sign-in button.
     signInButtonElement.setAttribute('hidden', 'true');
-    loginMessageElement.setAttribute('hidden', 'true');
 
 
     // We save the Firebase Messaging Device token and enable notifications.
@@ -213,7 +215,6 @@ function authStateObserver(user) {
 
     // Show sign-in button.
     signInButtonElement.removeAttribute('hidden');
-    loginMessageElement.removeAttribute('hidden')
   }
 }
 
@@ -260,7 +261,6 @@ checkSetup();
 // Shortcuts to DOM Elements.
 let itemsListElement = document.getElementById('item-card-container');
 let userNameElement = document.getElementById('user-name');
-let loginMessageElement = document.getElementById('login-first');
 let signInButtonElement = document.getElementById('sign-in');
 let signOutButtonElement = document.getElementById('sign-out');
 let signInSnackbarElement = document.getElementById('must-signin-snackbar');
