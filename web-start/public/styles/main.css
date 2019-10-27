@@ -243,24 +243,6 @@
     align-items: center;
     background-color: transparent;
 }
-
-.row.equal-height-grid {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.row.equal-height-grid .col {
-    display: flex;
-}
-
-.row.equal-height-grid .col .card {
-    display: flex;
-    flex-direction: column;
-}
-
-.card-align-bottom {
-    margin-top: auto;
-}
   
   
   
