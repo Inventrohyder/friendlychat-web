@@ -19,9 +19,18 @@ function signIn() {
   window.location.href='sign-in.html';
 }
 
+function signInAnonymously() {
+  firebase.auth().signInAnonymously().catch(
+    (error) => {
+      console.log(error.message);
+    }
+  )
+}
+
 // Signs-out of DamoGo Business.
 function signOut() {
   firebase.auth().signOut();
+  signInAnonymously();
   window.location.href="index.html";
 }
 
@@ -219,11 +228,7 @@ function authStateObserver(user) {
 
     // Show sign-in button.
     signInButtonElement.removeAttribute('hidden');
-    firebase.auth().signInAnonymously().catch(
-      (error) => {
-        console.log(error.message);
-      }
-    )
+    signInAnonymously();
   }
 }
 
