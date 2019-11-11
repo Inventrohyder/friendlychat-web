@@ -190,12 +190,12 @@ function loadItems() {
     });
   }, (error) => {
     if(error.code == 'permission-denied'){
-        // Display a message to the user using a Toast.
-        let data = {
-          message: 'You have to sign-in first',
-          timeout: 5000
-        };
-        signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
+        if (!firebase.auth().currentUser){
+          // reLoad items again
+          loadItems();
+        }
+        
+        
     }
   });
 }
