@@ -15,6 +15,10 @@
  */
 'use strict';
 
+function signIn() {
+  window.location.href='sign-in.html';
+}
+
 // Signs-out of DamoGo Business.
 function signOut() {
   firebase.auth().signOut();
@@ -255,6 +259,7 @@ let signOutButtonElement = document.getElementById('sign-out');
 let signInSnackbarElement = document.getElementById('must-signin-snackbar');
 
 signOutButtonElement.addEventListener('click', signOut);
+signInButtonElement.addEventListener('click', signIn);
 
 
 // initialize Firebase
