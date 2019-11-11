@@ -24,6 +24,9 @@
  const ITEM_MINIMUM_ORDER = 'minimumOrder';
  const ITEM_PACKING = 'packing';
 
+ let language = 'KOREAN'
+ const languages = ['KOREAN', 'ENGLISH']
+
 function signIn() {
   window.location.href='sign-in.html';
 }
@@ -94,8 +97,8 @@ const ITEM_TEMPLATE = `<div class="card item-info">
 </div>
 <div class="card-content card-align-bottom">
   <span class="card-title title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+  <span class = "${ITEM_ORIGINAL_PRICE}"></span>
   <span class = "${ITEM_PRICE}"></span>
-  <p class = "${ITEM_ORIGINAL_PRICE}"></p>
   <p class = "${ITEM_PACKING}"></p>
   <p class = "${ITEM_MINIMUM_ORDER}"></p>
   <a class="btn-floating add-fab waves-effect waves-light"><i class="material-icons add-fab">add</i></a>
@@ -159,21 +162,25 @@ function createAndInsertItem(id, timestamp) {
   return div;
 }
 
-const getContent = (item, contentName) => {
+const getContent = (item, contentName, lang) => {
+  if (languages.includes(lang)){
+    return item[lang][contentName] || '';
+  }
   return item[contentName]  || '';
 }
 
 // Displays an Item in the UI.
 function displayItem(id, timestamp, item) {
   let div = document.getElementById(id) || createAndInsertItem(id, timestamp);
+  console.log(item);
 
-  div.querySelector('.title').textContent = getContent(item, ITEM_NAME);
+  div.querySelector('.title').textContent = getContent(item, ITEM_NAME, language);
   div.querySelector('img').setAttribute('src', getContent(item, ITEM_IMAGE)[0]);
-  div.querySelector('.price').textContent = getContent(item, ITEM_PRICE);
-  div.querySelector('.description').textContent = getContent(item, ITEM_DESCRIPTION);
-  div.querySelector('.originalPrice').textContent = getContent(item, ITEM_ORIGINAL_PRICE);
-  div.querySelector('.packing').textContent = `Packing: ${getContent(item, ITEM_PACKING)}`;
-  div.querySelector('.minimumOrder').textContent = `Minimum Order: ${getContent(item, ITEM_MINIMUM_ORDER)}`;
+  div.querySelector('.price').textContent = getContent(item, ITEM_PRICE, language);
+  div.querySelector('.description').textContent = getContent(item, ITEM_DESCRIPTION, language);
+  div.querySelector('.originalPrice').textContent = getContent(item, ITEM_ORIGINAL_PRICE, language);
+  div.querySelector('.packing').textContent = getContent(item, ITEM_PACKING, language);
+  div.querySelector('.minimumOrder').textContent = getContent(item, ITEM_MINIMUM_ORDER, language);
 
   // Show the card fading-in and scroll to view the new item.
   setTimeout(() => {div.classList.add('visible')}, 1);

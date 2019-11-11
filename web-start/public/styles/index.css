@@ -23,6 +23,12 @@
 .price {
   font-size: large; 
   padding-right: 5px;
+  font-weight: bold;
+}
+
+.percentage {
+  background-color: #0288D1;
+  width: auto;
 }
 
 .originalPrice {
