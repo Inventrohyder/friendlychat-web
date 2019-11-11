@@ -15,6 +15,15 @@
  */
 'use strict';
 
+ // The Keys to differrent values in the database
+ const ITEM_NAME = 'name';
+ const ITEM_DESCRIPTION = 'description';
+ const ITEM_IMAGE = 'images';
+ const ITEM_PRICE = 'price';
+ const ITEM_ORIGINAL_PRICE = 'originalPrice';
+ const ITEM_MINIMUM_ORDER = 'minimumOrder';
+ const ITEM_PACKING = 'packing';
+
 function signIn() {
   window.location.href='sign-in.html';
 }
@@ -85,22 +94,19 @@ const ITEM_TEMPLATE = `<div class="card item-info">
 </div>
 <div class="card-content card-align-bottom">
   <span class="card-title title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-  <span class = "price"></span>
-  <span class = "originalPrice"></span>
+  <span class = "${ITEM_PRICE}"></span>
+  <p class = "${ITEM_ORIGINAL_PRICE}"></p>
+  <p class = "${ITEM_PACKING}"></p>
+  <p class = "${ITEM_MINIMUM_ORDER}"></p>
   <a class="btn-floating add-fab waves-effect waves-light"><i class="material-icons add-fab">add</i></a>
 </div>
 <div class="card-reveal">
   <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
-  <p class = "description" >Here is some more information about this product that is only revealed once clicked on.</p>
+  <p class = "${ITEM_DESCRIPTION}" >Here is some more information about this product that is only revealed once clicked on.</p>
 </div>
 </div>`;
 
-  // The Keys to differrent values in the database
-const ITEM_NAME = 'name';
-const ITEM_DESCRIPTION = 'description';
-const ITEM_IMAGE = 'imageUrl';
-const ITEM_PRICE = 'price';
-const ITEM_ORIGINAL_PRICE = 'originalPrice';
+ 
 
 // Delete a Item from the UI.
 function deleteItem(id) {
@@ -162,10 +168,12 @@ function displayItem(id, timestamp, item) {
   let div = document.getElementById(id) || createAndInsertItem(id, timestamp);
 
   div.querySelector('.title').textContent = getContent(item, ITEM_NAME);
-  div.querySelector('img').setAttribute('src', getContent(item, ITEM_IMAGE));
+  div.querySelector('img').setAttribute('src', getContent(item, ITEM_IMAGE)[0]);
   div.querySelector('.price').textContent = getContent(item, ITEM_PRICE);
   div.querySelector('.description').textContent = getContent(item, ITEM_DESCRIPTION);
   div.querySelector('.originalPrice').textContent = getContent(item, ITEM_ORIGINAL_PRICE);
+  div.querySelector('.packing').textContent = `Packing: ${getContent(item, ITEM_PACKING)}`;
+  div.querySelector('.minimumOrder').textContent = `Minimum Order: ${getContent(item, ITEM_MINIMUM_ORDER)}`;
 
   // Show the card fading-in and scroll to view the new item.
   setTimeout(() => {div.classList.add('visible')}, 1);
