@@ -33,7 +33,7 @@ function getUserName() {
 
 // Returns true if a user is signed-in.
 function isUserSignedIn() {
-  return !!firebase.auth().currentUser;
+  return ! (firebase.auth().currentUser == null || firebase.auth().currentUser.isAnonymous);
 }
 
 // Saves the messaging device token to the datastore.
@@ -66,21 +66,21 @@ function requestNotificationsPermissions() {
 }
 
 // Template for items.
-const ITEM_TEMPLATE = '<div class="card item-info">\
-<div class="card-image waves-effect waves-block waves-light">\
-  <img class="activator image" src="https://storage.googleapis.com/spec-host/mio-staging%2Fmio-material%2F1570560286703%2Fassets%2F1AjERaybjP3SVO4etBFrHVHNF0yU-9igT%2Fmda19-2x1-large.png">\
-</div>\
-<div class="card-content card-align-bottom">\
-  <span class="card-title title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>\
-  <span class = "price"></span>\
-  <span class = "originalPrice"></span>\
-  <a class="btn-floating add-fab waves-effect waves-light"><i class="material-icons add-fab">add</i></a>\
-</div>\
-<div class="card-reveal">\
-  <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>\
-  <p class = "description" >Here is some more information about this product that is only revealed once clicked on.</p>\
-</div>\
-</div>';
+const ITEM_TEMPLATE = `<div class="card item-info">
+<div class="card-image waves-effect waves-block waves-light">
+  <img class="activator image" src="https://storage.googleapis.com/spec-host/mio-staging%2Fmio-material%2F1570560286703%2Fassets%2F1AjERaybjP3SVO4etBFrHVHNF0yU-9igT%2Fmda19-2x1-large.png">
+</div>
+<div class="card-content card-align-bottom">
+  <span class="card-title title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+  <span class = "price"></span>
+  <span class = "originalPrice"></span>
+  <a class="btn-floating add-fab waves-effect waves-light"><i class="material-icons add-fab">add</i></a>
+</div>
+<div class="card-reveal">
+  <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
+  <p class = "description" >Here is some more information about this product that is only revealed once clicked on.</p>
+</div>
+</div>`;
 
   // The Keys to differrent values in the database
 const ITEM_NAME = 'name';
@@ -191,7 +191,7 @@ function loadItems() {
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
 function authStateObserver(user) {
-  if (user) { // User is signed in!
+  if (!(user == null || user.isAnonymous)) { // User is signed in!
     // Get the signed-in user's profile pic and name.
     let userName = user.displayName;
     
@@ -215,6 +215,11 @@ function authStateObserver(user) {
 
     // Show sign-in button.
     signInButtonElement.removeAttribute('hidden');
+    firebase.auth().signInAnonymously().catch(
+      (error) => {
+        console.log(error.message);
+      }
+    )
   }
 }
 
