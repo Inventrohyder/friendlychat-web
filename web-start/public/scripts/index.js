@@ -223,22 +223,6 @@ function authStateObserver(user) {
   }
 }
 
-// Returns true if user is signed-in. Otherwise false and displays a message.
-function checkSignedInWithMessage() {
-  // Return true if the user is signed in Firebase
-  if (isUserSignedIn()) {
-    return true;
-  }
-
-  // Display a message to the user using a Toast.
-  let data = {
-    message: 'You must sign-in first',
-    timeout: 2000
-  };
-  signInSnackbarElement.MaterialSnackbar.showSnackbar(data);
-  return false;
-}
-
 // Adds a size to Google Profile pics URLs.
 function addSizeToGoogleProfilePic(url) {
   if (url.indexOf('googleusercontent.com') !== -1 && url.indexOf('?') === -1) {
@@ -269,10 +253,8 @@ let userNameElement = document.getElementById('user-name');
 let signInButtonElement = document.getElementById('sign-in');
 let signOutButtonElement = document.getElementById('sign-out');
 let signInSnackbarElement = document.getElementById('must-signin-snackbar');
-let documentElem = document.getElementsByTagName('body')[0];
 
 signOutButtonElement.addEventListener('click', signOut);
-documentElem.addEventListener('click', checkSignedInWithMessage)
 
 
 // initialize Firebase
