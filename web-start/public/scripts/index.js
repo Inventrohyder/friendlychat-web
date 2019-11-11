@@ -101,7 +101,6 @@ const ITEM_TEMPLATE = `<div class="card item-info">
   <span class = "${ITEM_PRICE}"></span>
   <p class = "${ITEM_PACKING}"></p>
   <p class = "${ITEM_MINIMUM_ORDER}"></p>
-  <a class="btn-floating add-fab waves-effect waves-light"><i class="material-icons add-fab">add</i></a>
 </div>
 <div class="card-reveal">
   <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
